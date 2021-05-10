@@ -6,11 +6,17 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import spring5_aop_study.aop.Calculator;
 import spring5_aop_study.aop.RecCalculator;
+import spring5_aop_study.aspect.CacheAspect;
 import spring5_aop_study.aspect.ExecTimeAspect;
 
 @Configuration
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-public class AppCix {
+@EnableAspectJAutoProxy
+public class AppCtxWithCache {
+	
+	@Bean
+	public CacheAspect cacheAspect() {
+		return new CacheAspect();
+	}
 	
 	@Bean
 	public ExecTimeAspect execTimeAspect() {
@@ -18,7 +24,7 @@ public class AppCix {
 	}
 	
 	@Bean
-	public Calculator calculator1() {
+	public Calculator calculator() {
 		return new RecCalculator();
 	}
 	/*

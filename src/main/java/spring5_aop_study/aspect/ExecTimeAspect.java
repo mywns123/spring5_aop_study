@@ -6,15 +6,19 @@ import java.util.Arrays;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 
 @Aspect
+@Order(1)
 public class ExecTimeAspect {
 	
-	@Pointcut("execution(public *spring5_aop_study.aop..*(..))")
+	@Pointcut("execution(public * spring5_aop_study.aop..*(..))")
 	private void publicTarget() {}
 	
+	@Around("publicTarget()")
 	public Object measure(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.nanoTime();
 		try {
